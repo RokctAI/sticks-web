@@ -240,10 +240,10 @@ export const STICKS_GALLERY = {
   screens: [
     { step: "sticks_team", title: "Your team", body: "Who is on shift and who is waiting on you." },
     { step: "sticks_tasks", title: "Tasks", body: "Every job, and what is still open." },
-    { step: "sticks_task", title: "One task", body: "The steps a Stick planned, and where it is." },
     { step: "sticks_calls", title: "Calls", body: "What your Sticks said on the phone." },
     { step: "sticks_report", title: "Friday report", body: "What each Stick finished this week." },
     { step: "sticks_lock", title: "Lock", body: "Step away and the work stays private." },
+    { step: "sticks_settings", title: "Settings", body: "What the lock screen shows, and how asks reach you." },
   ] as { step: TourStep; title: string; body: string }[],
 };
 

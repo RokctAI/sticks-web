@@ -136,6 +136,7 @@ export const TOUR_FALLBACK: Record<string, string> = {
   sticks_calls: "15-sticks_calls.png",
   sticks_talk: "16-sticks_talk.png",
   sticks_report: "17-sticks_report.png",
+  sticks_settings: "18-sticks_settings.png",
   sticks_lock: "19-sticks_lock.png",
 };
 

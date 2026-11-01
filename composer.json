@@ -36,7 +36,7 @@
       "source": "git",
       "git": "https://github.com/RokctAI/agent",
       "path": "../agent/agent/nextjs",
-      "ref": "140b26be06bab578f093dbb83375aaa28db97f8e",
+      "ref": "852b9143bb2ffa7636d63faa823d2d77000290c6",
       "sha256": "c629e669d7aeba008b2e1c23a845eb65628f09e8538f738abbfa1385bf1088a3",
       "version": "1.24.0",
       "home_sdk": true,
