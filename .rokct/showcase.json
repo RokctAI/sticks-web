@@ -1,0 +1,14 @@
+{
+  "name": "Sticks",
+  "kind": "AI employees",
+  "tagline": "A team that asks before it acts.",
+  "url": "https://sticks-mrubtsy6p-rendanisinyages-projects.vercel.app",
+  "repo": "RokctAI/sticks-web",
+  "rank": 9,
+  "shots": {
+    "branch": "site-shots",
+    "desktop": "latest/desktop-light.webp",
+    "phone": "latest/phone-light.webp"
+  },
+  "logo_back": null
+}

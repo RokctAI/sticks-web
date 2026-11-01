@@ -29,13 +29,15 @@
  * app/styles/rokct-scroll.css and app/landing/page.tsx imports it, so
  * importing it here as well would duplicate it AND make this file depend
  * on composed output that a bare checkout does not have. Its thumb
- * defaults are rokctai_frontend's primary, which is also this shell's (see
- * below), so no recolour is needed here.
+ * defaults are rokctai_frontend's primary; the Sticks landing sets its own
+ * black-on-light, white-on-dark scrollbar.
  *
- * `--primary` (and `--primary-foreground`) are the PLATFORM's values, as
- * carried by rokctai_frontend, until this product has a look of its own -
- * a spawned shell wears the platform's accent on day one and no brand
- * colour is invented here. Change these two tokens here and nowhere else -
+ * `--primary` (and `--primary-foreground`) are Sticks' own: black on light
+ * and white on dark (Ray: Sticks is black and white; no site of ours shares
+ * a main colour - rokct.ai yellow, Polaris lime, telephony teal, Supacharge
+ * orange). The landing itself (agent_sdk's app_type sticks) carries its
+ * own scoped tokens; these two feed the primitives, the composed routes
+ * and base_sdk's favicon letter. Change these two tokens here and nowhere else -
  * the composed sections, the primitives, and base_sdk's generated favicon
  * letter (app/brand-icon/route.tsx reads the first `--primary:` inside the
  * `:root` block of this file) all follow. `--ring` reads the same primary
@@ -54,8 +56,8 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 48 96% 53%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 0 0% 4%;
+    --primary-foreground: 0 0% 98%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
@@ -66,7 +68,7 @@
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 48 96% 53%;
+    --ring: 0 0% 4%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -82,8 +84,8 @@
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 48 96% 53%;
-    --primary-foreground: 240 5.9% 10%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 4%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 240 3.7% 15.9%;
@@ -94,7 +96,7 @@
     --destructive-foreground: 0 0% 98%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 48 96% 53%;
+    --ring: 0 0% 98%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
