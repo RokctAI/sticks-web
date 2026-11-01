@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
+    "prebuild": "test -f app/lib/site-metadata.ts || bash scripts/compose.sh",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit"
