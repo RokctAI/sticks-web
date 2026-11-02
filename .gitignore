@@ -138,7 +138,6 @@ next-env.d.ts
 /components/custom/landing/site-shots.ts
 /components/custom/landing/sticks-art.tsx
 /components/custom/landing/sticks-back-to-top.ts
-/components/custom/landing/sticks-crowd.ts
 /components/custom/landing/sticks-fonts.ts
 /components/custom/landing/sticks-landing-config.ts
 /components/custom/landing/sticks-landing.client.tsx
@@ -176,4 +175,6 @@ next-env.d.ts
 /public/brand/marks/google-play.svg
 /public/brand/marks/windows.svg
 /public/sticks-icon.svg
+/public/sticks/crowd-dark.webp
+/public/sticks/crowd-light.webp
 # @rokct-composed-end

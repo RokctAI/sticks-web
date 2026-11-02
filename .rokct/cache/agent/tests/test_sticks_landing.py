@@ -12,16 +12,17 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-"""agent_sdk 1.24.0: the Sticks website's block (app_type sticks).
+"""agent_sdk 1.25.0: the Sticks website's block (app_type sticks).
 
 What the block is made of and the rules it keeps: only its own files
 compose there ("common": false), it owns the root page, it registers the
 site metadata and the Back to top style in base's one-line contract, every
-file it names exists, its colours are black and white, its icons are
+file it names exists, its colours are the approved concept's (a black and
+white base with the concept's highlight colours on top), its icons are
 Remixicon, the footer is base's SiteCredit with no wordmark, the header logo
 links to "/", reduced motion is honoured, no phone screen is a picture
-committed here, and the pure modules behave under node
-(tests/sticks-landing.test.mts).
+committed here (the one picture shipped is the concept's crowd), and the
+pure modules behave under node (tests/sticks-landing.test.mts).
 
 Stdlib only. Run: python3 agent/nextjs/tests/test_sticks_landing.py
 """
@@ -89,7 +90,9 @@ class TestSticksBlock(unittest.TestCase):
         targets = {e["to"] for e in block()["installs"]}
         for req in block()["requires"]:
             self.assertNotIn(req, targets)
-        everything = "".join(read(os.path.join(r, f)) for r, _, fs in os.walk(STICKS) for f in fs)
+        everything = "".join(
+            read(os.path.join(r, f)) for r, _, fs in os.walk(STICKS) for f in fs if not f.endswith(".webp")
+        )
         for word in ("header-auth", "/login", "/register", "auth_sdk/"):
             self.assertNotIn(word, everything.replace("composes no auth_sdk", ""))
 
@@ -113,21 +116,49 @@ class TestSticksBlock(unittest.TestCase):
 
 
 class TestSticksDesignRules(unittest.TestCase):
-    def test_colours_are_black_white_and_greys(self):
-        for name in ("sticks-landing.css",):
-            for value in HEX.findall(landing(name)):
-                v = value[1:]
-                if len(v) == 3:
-                    v = "".join(c * 2 for c in v)
-                r, g, b = (int(v[i:i + 2], 16) for i in (0, 2, 4))
-                self.assertLessEqual(max(r, g, b) - min(r, g, b), 8, f"{value} is not a neutral")
+    # The approved concept's palette (artifact PDm9514Z16ypx8dk3oQQtq):
+    # warm paper and ink in light and dark, and its highlight colours.
+    CONCEPT_PAPER_INK = {
+        "#F4F1EA", "#ECE7DC", "#FFFFFF", "#1B1916", "#55504A", "#8A847B", "#DCD5C8",
+        "#161412", "#1F1C19", "#24211D", "#F2EEE6", "#BDB6AA", "#8C857A", "#35302A",
+        "#121110", "#000",
+    }
+    CONCEPT_HIGHLIGHTS = {
+        "--orange": "#EC7A3C", "--green": "#5DAE4B", "--navy": "#3A5B93", "--purple": "#8A5CC0",
+        "--teal": "#2F9C95", "--gold": "#D9A62B", "--ok": "#2E7D4F", "--no": "#B3412E",
+        "--ring": "#EC7A3C", "--heart": "#D94A4A",
+    }
+
+    def test_colours_are_the_concepts(self):
+        css = landing("sticks-landing.css")
+        allowed = {c.upper() for c in self.CONCEPT_PAPER_INK | set(self.CONCEPT_HIGHLIGHTS.values())}
+        allowed |= {"#6CC08A", "#F08A72"}  # the concept's dark --ok and --no
+        for value in HEX.findall(css):
+            self.assertIn(value.upper(), allowed, f"{value} is not in the concept's palette")
+        # Ray (2026-11-02): black and white never meant removing the
+        # highlight colours or the Sticks' colours.
+        for token, value in self.CONCEPT_HIGHLIGHTS.items():
+            self.assertIn(f"{token}:{value}", css)
+        for rule in (
+            ".you-ring{position:absolute;left:57.6%;top:52.4%;width:12.5%;aspect-ratio:1;transform:translate(-50%,-50%);border:3px solid var(--ring)",
+            ".pill.ask{background:color-mix(in srgb,var(--gold) 26%,transparent)",
+            ".pill.msg{background:color-mix(in srgb,var(--teal) 22%,transparent)",
+            ".pill.hand{background:color-mix(in srgb,var(--purple) 22%,transparent)",
+            ".shift.wait .st::before{background:var(--gold)}",
+            ".try{position:absolute;top:-14px;left:24px;background:var(--orange)",
+            ".foot .heart{color:var(--heart)",
+            ".line.never>i{background:color-mix(in srgb,var(--no) 30%,transparent)}",
+        ):
+            self.assertIn(rule, css)
+        art = landing("sticks-art.tsx")
+        self.assertIn('tumi: { style: "cap", colour: "#4E8F3A" }', art, "Tumi's green cap")
         icon = read(os.path.join(STICKS, "app", "icon.svg"))
         self.assertEqual(set(HEX.findall(icon)), {"#0A0A0A", "#FFFFFF"})
 
     def test_scrollbar_is_ink_on_paper_in_both_themes(self):
         css = landing("sticks-landing.css")
         self.assertIn("scrollbar-color:var(--stx-ink) var(--stx-paper)", css)
-        self.assertIn("html.dark:has(.stx){ --stx-paper:#0A0A0A; --stx-ink:#FAFAFA }", css)
+        self.assertIn("html.dark:has(.stx){ --stx-paper:#161412; --stx-ink:#F2EEE6 }", css)
 
     def test_reduced_motion_is_honoured(self):
         self.assertIn("@media (prefers-reduced-motion:reduce)", landing("sticks-landing.css"))
@@ -152,20 +183,25 @@ class TestSticksDesignRules(unittest.TestCase):
         self.assertRegex(landing("sticks-landing.client.tsx"), r'<a className="brand" href="/"')
 
     def test_screens_come_from_the_tour_not_from_here(self):
+        pictures = set()
         for root, _, files in os.walk(STICKS):
             for f in files:
-                self.assertFalse(f.endswith((".png", ".webp", ".jpg", ".jpeg")), f)
+                if f.endswith((".png", ".webp", ".jpg", ".jpeg")):
+                    pictures.add(os.path.relpath(os.path.join(root, f), STICKS))
+        self.assertEqual(pictures, {"public/sticks/crowd-light.webp", "public/sticks/crowd-dark.webp"})
         self.assertIn("raw.githubusercontent.com/${STICKS_APP_REPO}/main/${STICKS_TOUR_DIR}", landing("sticks-sources.ts"))
 
-    def test_crowd_is_top_down_and_backgrounds_fade(self):
+    def test_crowd_is_the_concepts_picture_and_fades(self):
         art = landing("sticks-art.tsx")
-        self.assertIn("buildCrowd()", art)
-        self.assertEqual(art.count('className="cr-face"'), 1, "one face in the crowd, the one who looks up")
+        self.assertIn('light: "/sticks/crowd-light.webp"', art)
+        self.assertIn('dark: "/sticks/crowd-dark.webp"', art)
+        targets = {e["to"] for e in block()["installs"]}
+        self.assertTrue({"public/sticks/crowd-light.webp", "public/sticks/crowd-dark.webp"} <= targets)
         self.assertIn("mask-image:radial-gradient", landing("sticks-landing.css"))
 
 
 class TestSticksUnderNode(unittest.TestCase):
-    STAGED = ("sticks-sources.ts", "sticks-crowd.ts", "sticks-landing-config.ts")
+    STAGED = ("sticks-sources.ts", "sticks-landing-config.ts")
 
     def test_behaviour_under_node(self):
         node = shutil.which("node")

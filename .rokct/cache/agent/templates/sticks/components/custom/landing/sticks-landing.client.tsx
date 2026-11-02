@@ -16,7 +16,7 @@
 
 "use client";
 
-// The Sticks landing's client islands (agent_sdk 1.24.0): the header (its
+// The Sticks landing's client islands (agent_sdk 1.25.0): the header (its
 // rule once the page scrolls, the light/dark switch through the shell's
 // next-themes provider), the live feed (a new line every few seconds) and
 // the ask you can answer. Every word is sticks-landing-config.ts's.
@@ -95,12 +95,11 @@ export function SticksHeader() {
               <RiContrast2Line />
             </i>
           </button>
-          <a className="btn btn-ink btn-sm" href="#get">
+          <a className="btn btn-dl btn-sm" href="#get">
             <i aria-hidden="true">
               <RiDownload2Line />
             </i>
-            <span className="lg">{STICKS_HEADER.getApp}</span>
-            <span className="xs">{STICKS_HEADER.getAppShort}</span>
+            <span>{STICKS_HEADER.getApp}</span>
           </a>
         </div>
       </div>
@@ -209,7 +208,7 @@ export function SticksAsk() {
               {c.name}
               <small>{c.did}</small>
             </span>
-            <i aria-hidden="true">
+            <i className="to" aria-hidden="true">
               <RiArrowRightLine />
             </i>
           </span>

@@ -14,13 +14,12 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Every word of the Sticks landing (agent_sdk 1.24.0, app_type sticks), as
+// Every word of the Sticks landing (agent_sdk 1.25.0, app_type sticks), as
 // the concept Ray approved draws it (artifact PDm9514Z16ypx8dk3oQQtq: "this
-// is the best design"), with his comments on it built in: three app screens
-// in one row under "Meet your Sticks", a screen of a Stick at work beside
-// the live feed (not the team or hire screen), every screen from the app's
-// own tour, and install buttons for Android and Windows from the newest
-// release. Sticks is ROKCT's own product and app-only: there is nothing to
+// is the best design"), with his comments on it built in: the Hire a Stick
+// screen and the New hire card side by side in one row (not top to
+// bottom), every screen from the app's own tour, and install buttons for
+// Android and Windows from the newest release. Sticks is ROKCT's own product and app-only: there is nothing to
 // sign up for on the web, so nothing here links to a login.
 //
 // The names and duties are the app's own (its Hire a Stick screen and the
@@ -51,17 +50,13 @@ export const STICKS_HEADER = {
   sections: "Sections",
   theme: "Switch light or dark",
   getApp: "Get the app",
-  getAppShort: "Get it",
 };
 
 export const STICKS_DOWNLOAD = {
   android: "Download for Android",
   windows: "Download for Windows",
-  androidShort: "Android",
-  windowsShort: "Windows",
-  /** `{version}` is the release tag, `{size}` the file's size. */
-  note: "Free from GitHub · {version}",
-  noteUnknown: "Free from GitHub releases",
+  note: "Free from GitHub",
+  noteUnknown: "Free from GitHub",
   platforms: "Android phones and Windows PCs",
   soon: "Coming soon",
   soonNote: "The first release is on its way. Watch the releases page to hear when it lands.",
@@ -107,11 +102,7 @@ export const STICKS_MEET = {
     { stick: "lindiwe", role: "Marketing", duty: "Plans posts and writes the newsletter." },
     { stick: "sipho", role: "Operations", duty: "Keeps the checklists and orders supplies." },
   ] as { stick: StickKey; role: string; duty: string; featured?: boolean }[],
-  screens: [
-    { step: "sticks_hire", caption: "Hire a Stick", alt: "The Hire a Stick screen in the Sticks app, listing the roles" },
-    { step: "sticks_setup", caption: "Set it up", alt: "Setting up a new Stick: a name, a gender and a role" },
-    { step: "sticks_profile", caption: "Its profile", alt: "A Stick's profile: role, shift and what it owns" },
-  ] as { step: TourStep; caption: string; alt: string }[],
+  screen: { step: "sticks_hire" as TourStep, alt: "The Hire a Stick screen in the Sticks app, listing six roles" },
   hire: {
     label: "Example: hiring Sipho as your Operations Stick",
     title: "New hire",
@@ -130,7 +121,7 @@ export const STICKS_MEET = {
       { text: "Writing the first order for you to approve", done: false },
     ],
   },
-  real: "Real screens from the app's guided tour",
+  real: "Real screen: Hire a Stick, with an example first day",
 };
 
 export const STICKS_FEED = {
@@ -149,9 +140,8 @@ export const STICKS_FEED = {
   ],
   board: "Your team",
   live: "Live",
-  boardLabel: "A live preview of the feed",
-  note: "A live preview of the feed, with the team from the app's tour.",
-  screen: { step: "sticks_stick" as TourStep, caption: "Real screen: one Stick at work", alt: "One Stick's screen in the app: what Thandi is doing now and what needs you" },
+  boardLabel: "Example live feed",
+  note: "A web demo of the feed, using the example team from the app.",
   team: [
     { stick: "tumi", name: "Tumi", state: "wait", label: "Waiting on you" },
     { stick: "thandi", name: "Thandi", state: "work", label: "Working" },
@@ -210,9 +200,9 @@ export const STICKS_ASK = {
     again: "Ask again",
   },
   screens: [
-    { step: "sticks_ask", caption: "Real screen: an ask", alt: "App screen: a Stick asks before it acts, with what will go out" },
-    { step: "sticks_give", caption: "Real screen: give a task", alt: "App screen: give a Stick a task in plain words" },
-  ] as { step: TourStep; caption: string; alt: string }[],
+    { step: "sticks_ask", caption: "Real screen: an ask", alt: "App screen: a Stick asks before it acts, with what will go out", icon: "lock" },
+    { step: "sticks_give", caption: "Real screen: give a task", alt: "App screen: give a Stick a task in plain words", icon: "phone" },
+  ] as { step: TourStep; caption: string; alt: string; icon: "phone" | "call" | "lock" }[],
 };
 
 export const STICKS_BETWEEN = {
@@ -235,13 +225,15 @@ export const STICKS_BETWEEN = {
 export const STICKS_GALLERY = {
   eyebrow: "Inside the app",
   title: "The whole office fits in your pocket.",
-  body: "Every screen below comes from the app's guided tour, captured from the app as it is built today. Swipe to see more.",
+  body: "Every screen below is taken from the app as it is built today. Swipe to see more.",
   label: "App screens",
   screens: [
     { step: "sticks_team", title: "Your team", body: "Who is on shift and who is waiting on you." },
     { step: "sticks_tasks", title: "Tasks", body: "Every job, and what is still open." },
+    { step: "sticks_stick", title: "One Stick", body: "What Thandi is doing now and what needs you." },
     { step: "sticks_calls", title: "Calls", body: "What your Sticks said on the phone." },
     { step: "sticks_report", title: "Friday report", body: "What each Stick finished this week." },
+    { step: "sticks_profile", title: "Profile", body: "A Stick's role, shift and what it owns." },
     { step: "sticks_lock", title: "Lock", body: "Step away and the work stays private." },
     { step: "sticks_settings", title: "Settings", body: "What the lock screen shows, and how asks reach you." },
   ] as { step: TourStep; title: string; body: string }[],

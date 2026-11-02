@@ -36,12 +36,12 @@
       "source": "git",
       "git": "https://github.com/RokctAI/agent",
       "path": "../agent/agent/nextjs",
-      "ref": "852b9143bb2ffa7636d63faa823d2d77000290c6",
+      "ref": "1e5c6edd39931b00b1bdb967b11d69059a37e481",
       "sha256": "c629e669d7aeba008b2e1c23a845eb65628f09e8538f738abbfa1385bf1088a3",
-      "version": "1.24.0",
+      "version": "1.25.0",
       "home_sdk": true,
       "_sha256_comment": "SHA-256 of agent/nextjs/install.py (the generic installer with sdk_name 'agent_sdk'; the digest the consumers index pins).",
-      "_comment": "Home SDK through app_type.sticks (agent_sdk 1.24.0): app/page.tsx is the Sticks landing (concept artifact PDm9514Z16ypx8dk3oQQtq), with the site metadata and the Back to top style registered in base_sdk's registries. Pinned to the agent_sdk 1.24.0 PR head until it merges; then refresh against main."
+      "_comment": "Home SDK through app_type.sticks (agent_sdk 1.25.0): app/page.tsx is the Sticks landing (concept artifact PDm9514Z16ypx8dk3oQQtq) in the concept's colours, with its crowd picture under public/sticks/ and the site metadata and the Back to top style registered in base_sdk's registries. Pinned to the agent_sdk 1.25.0 PR head (RokctAI/agent#567) until it merges; then refresh against main."
     }
   ]
 }

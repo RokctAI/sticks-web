@@ -14,9 +14,9 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// agent_sdk 1.24.0: the pure rules behind the Sticks landing - which
+// agent_sdk 1.25.0: the pure rules behind the Sticks landing - which
 // release files the download buttons link, which tour capture each phone
-// shows, the top-down crowd, and the copy helpers. Run by
+// shows, and the copy helpers. Run by
 // tests/test_sticks_landing.py against staged copies of the modules.
 
 import assert from 'node:assert/strict';
@@ -31,8 +31,7 @@ import {
   tourScreenFiles,
   tourScreenUrl,
 } from './sticks-sources.ts';
-import { buildCrowd, seeded } from './sticks-crowd.ts';
-import { STICKS_ASK, STICKS_BETWEEN, STICKS_FEED, STICKS_GALLERY, STICKS_MEET, feedTime, fill } from './sticks-landing-config.ts';
+import { STICKS_ASK, STICKS_BETWEEN, STICKS_DOWNLOAD, STICKS_GALLERY, STICKS_MEET, feedTime, fill } from './sticks-landing-config.ts';
 
 const DL = 'https://github.com/RokctAI/sticks/releases/download/v1.2.12/';
 const RELEASE = {
@@ -121,35 +120,17 @@ describe('tour screens: matched by step id, light and dark', () => {
 
   it('every screen the page shows is a known tour step', () => {
     const steps = [
-      ...STICKS_MEET.screens.map((s) => s.step),
-      STICKS_FEED.screen.step,
+      STICKS_MEET.screen.step,
       ...STICKS_ASK.screens.map((s) => s.step),
       ...STICKS_BETWEEN.screens.map((s) => s.step),
       ...STICKS_GALLERY.screens.map((s) => s.step),
     ];
     for (const step of steps) assert.ok(step in TOUR_FALLBACK, step);
     assert.equal(new Set(steps).size, steps.length, 'no screen is shown twice');
-    // Ray: three screens in one row under Meet your Sticks, and the feed's
-    // screen is a Stick at work - not the team or the hire screen.
-    assert.equal(STICKS_MEET.screens.length, 3);
-    assert.ok(!['sticks_team', 'sticks_hire'].includes(STICKS_FEED.screen.step));
-  });
-});
-
-describe('the crowd: top-down, one looks up', () => {
-  it('is the same on every run', () => {
-    assert.deepEqual(buildCrowd(), buildCrowd());
-    const a = seeded(3), b = seeded(3);
-    assert.equal(a(), b());
-  });
-
-  it('keeps a clear ring around the one who looks up', () => {
-    const crowd = buildCrowd();
-    assert.ok(crowd.sticks.length > 120);
-    for (const s of crowd.sticks) {
-      assert.ok(Math.hypot(s.x - crowd.one.x, s.y - crowd.one.y) >= 88 * 0.95);
-      assert.ok(s.turn >= 0 && s.turn <= 360);
-    }
+    // The concept: Meet your Sticks shows the Hire a Stick screen beside
+    // the New hire card, and the gallery keeps One Stick (Ray: "like this").
+    assert.equal(STICKS_MEET.screen.step, 'sticks_hire');
+    assert.ok(STICKS_GALLERY.screens.some((s) => s.step === 'sticks_stick'));
   });
 });
 
@@ -159,5 +140,11 @@ describe('copy helpers', () => {
     assert.equal(feedTime(24 * 60 + 5), '00:05');
     assert.equal(fill('Free · {version}', { version: 'v1.2.12' }), 'Free · v1.2.12');
     assert.equal(fill('{missing}', {}), '{missing}');
+  });
+
+  it('words the downloads as the concept does', () => {
+    assert.equal(STICKS_ASK.screens.length, 2);
+    assert.equal(fill(STICKS_DOWNLOAD.note, { version: 'v1.2.12' }), 'Free from GitHub');
+    assert.equal(STICKS_DOWNLOAD.platforms, 'Android phones and Windows PCs');
   });
 });

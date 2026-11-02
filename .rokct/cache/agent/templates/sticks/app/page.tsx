@@ -15,7 +15,7 @@
  */
 
 // The page that serves `/` in a shell whose home SDK is agent_sdk with
-// app_type sticks (agent_sdk 1.24.0): the Sticks landing Ray approved
+// app_type sticks (agent_sdk 1.25.0): the Sticks landing Ray approved
 // (components/custom/landing/sticks-landing.tsx). Sticks is app-only, so
 // the page explains it and links the app's downloads; it reads no session
 // and no backend. The release and the tour screens are re-read from GitHub

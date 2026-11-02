@@ -14,18 +14,20 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// The Sticks landing at `/` (agent_sdk 1.24.0, app_type sticks): the
-// concept Ray approved ("this is the best design"), in black and white -
-// header, the top-down crowd hero, the house rule, Meet your Sticks with
-// three app screens in a row and the New hire card, the live feed beside a
-// screen of one Stick at work, the ask you can try, Between Sticks, the app
-// gallery, how it works, the closing call to action and the footer credit.
+// The Sticks landing at `/` (agent_sdk 1.25.0, app_type sticks): the
+// concept Ray approved ("this is the best design"), section for section and
+// in its colours - black and white as the base with the concept's
+// highlights on top (sticks-landing.css). Header, the crowd hero with the
+// orange ring round the one who looks up, the house rule, Meet your Sticks
+// with the Hire a Stick screen and the New hire card in one row, the live
+// feed, the ask you can try, Between Sticks, the app gallery, how it works,
+// the closing call to action and the footer credit.
 //
 // Server component: the release and the tour listing are read here
 // (sticks-sources.server.ts, cached for an hour) and handed down; the
 // header, the feed ticker and the ask are the client islands in
 // sticks-landing.client.tsx. Every word is sticks-landing-config.ts's,
-// the drawings sticks-art.tsx's, the tokens sticks-landing.css's (scoped
+// the drawings and the crowd picture sticks-art.tsx's, the tokens sticks-landing.css's (scoped
 // to .stx), the faces sticks-fonts.ts's. Icons are Remixicon. The
 // footer's line is base_sdk's SiteCredit: "© 2026 Sticks · Built with ♥
 // by ROKCT", the heart read as "love". No wordmark closes the page and no
@@ -41,11 +43,13 @@ import {
   RiCheckboxCircleFill,
   RiDownloadCloud2Line,
   RiGithubLine,
+  RiLock2Line,
   RiHandHeartLine,
   RiInboxArchiveLine,
   RiInformationLine,
   RiKey2Line,
   RiLoader4Line,
+  RiPhoneLine,
   RiPulseLine,
   RiQuestionAnswerLine,
   RiRouteLine,
@@ -62,7 +66,7 @@ import type { ReactNode } from "react";
 
 import { SiteCredit } from "@/components/custom/site-credit";
 
-import { CrowdArt, StickHead, crowdOnePosition, heroFocus } from "./sticks-art";
+import { CrowdPicture, StickHead } from "./sticks-art";
 import {
   STICKS_ASK,
   STICKS_BETWEEN,
@@ -96,7 +100,7 @@ function Marked({ before, mark, after }: { before: string; mark: string; after: 
   );
 }
 
-function Phone({ shot, alt, small, eager }: { shot: TourScreen; alt: string; small?: boolean; eager?: boolean }) {
+function Phone({ shot, alt, eager }: { shot: TourScreen; alt: string; eager?: boolean }) {
   // Plain <img>s: the screens are the app's tour captures on GitHub, so they
   // follow every merge of the app without a rebuild of this site. The light
   // and the dark capture are both in the markup and the theme class picks
@@ -105,11 +109,11 @@ function Phone({ shot, alt, small, eager }: { shot: TourScreen; alt: string; sma
   // row scrolls sideways where a lazy image may never be asked for.
   const loading = eager ? "eager" : "lazy";
   return (
-    <div className={small ? "phone sm" : "phone"}>
+    <div className="phone">
       {shot.light ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          className={shot.dark ? "shot-l" : undefined}
+          className={shot.dark ? "l" : undefined}
           src={shot.light}
           alt={alt}
           width={1080}
@@ -120,17 +124,20 @@ function Phone({ shot, alt, small, eager }: { shot: TourScreen; alt: string; sma
       ) : null}
       {shot.dark ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img className="shot-d" src={shot.dark} alt={alt} width={1080} height={1920} loading={loading} decoding="async" />
+        <img className="d" src={shot.dark} alt={alt} width={1080} height={1920} loading={loading} decoding="async" />
       ) : null}
     </div>
   );
 }
 
-function Real({ children }: { children: ReactNode }) {
+const REAL_ICONS = { phone: RiSmartphoneLine, call: RiPhoneLine, lock: RiLock2Line } as const;
+
+function Real({ children, icon = "phone" }: { children: ReactNode; icon?: keyof typeof REAL_ICONS }) {
+  const Icon = REAL_ICONS[icon];
   return (
     <div className="real">
       <I>
-        <RiSmartphoneLine />
+        <Icon />
       </I>
       {children}
     </div>
@@ -141,27 +148,15 @@ const RULE_ICONS = { "user-forbid": RiUserForbidLine, key: RiKey2Line, "hand-hea
 const LINE_ICONS = { swap: RiArrowLeftRightLine, inbox: RiInboxArchiveLine, spy: RiSpyLine } as const;
 const STEP_ICONS = { download: RiDownloadCloud2Line, "user-add": RiUserAddLine, answer: RiQuestionAnswerLine } as const;
 
-function DownloadRow({ downloads, compact }: { downloads: Downloads; compact?: boolean }) {
+function downloadHref(downloads: Downloads, link: Downloads["android"]): string | null {
+  return link ? link.url : downloads.state === "unknown" ? downloads.releaseUrl : null;
+}
+
+function DownloadRow({ downloads }: { downloads: Downloads }) {
   const soon = downloads.state === "none";
-  const href = (link: Downloads["android"]) =>
-    link ? link.url : downloads.state === "unknown" ? downloads.releaseUrl : null;
   const platforms = [
-    {
-      key: "android",
-      label: STICKS_DOWNLOAD.android,
-      short: STICKS_DOWNLOAD.androidShort,
-      icon: <RiAndroidFill />,
-      href: href(downloads.android),
-      primary: true,
-    },
-    {
-      key: "windows",
-      label: STICKS_DOWNLOAD.windows,
-      short: STICKS_DOWNLOAD.windowsShort,
-      icon: <RiWindowsFill />,
-      href: href(downloads.windows),
-      primary: false,
-    },
+    { key: "android", label: STICKS_DOWNLOAD.android, icon: <RiAndroidFill />, href: downloadHref(downloads, downloads.android), primary: true },
+    { key: "windows", label: STICKS_DOWNLOAD.windows, icon: <RiWindowsFill />, href: downloadHref(downloads, downloads.windows), primary: false },
   ];
   const note = soon
     ? STICKS_DOWNLOAD.soonNote
@@ -169,58 +164,70 @@ function DownloadRow({ downloads, compact }: { downloads: Downloads; compact?: b
       ? fill(STICKS_DOWNLOAD.note, { version: downloads.version })
       : STICKS_DOWNLOAD.noteUnknown;
   return (
-    <div className={compact ? "dl compact" : "dl"}>
+    <div className="dl">
       <div className="cta-row">
         {platforms.map((p) =>
           p.href ? (
-            <a
-              key={p.key}
-              className={p.primary ? "btn btn-ink" : "btn btn-ghost"}
-              href={p.href}
-              rel="noopener"
-              data-download={p.key}
-            >
+            <a key={p.key} className={p.primary ? "btn btn-dl" : "btn btn-ghost"} href={p.href} rel="noopener" data-download={p.key}>
               <I>{p.icon}</I>
-              {compact ? p.short : p.label}
+              {p.label}
             </a>
           ) : (
             <span
               key={p.key}
-              className={p.primary ? "btn btn-ink is-soon" : "btn btn-ghost is-soon"}
+              className={p.primary ? "btn btn-dl is-soon" : "btn btn-ghost is-soon"}
               aria-disabled="true"
               data-download={p.key}
             >
               <I>{p.icon}</I>
-              {compact ? p.short : p.label}
+              {p.label}
               <small>{STICKS_DOWNLOAD.soon}</small>
             </span>
           ),
         )}
       </div>
-      {!compact && (
-        <p className="dl-note">
-          <I>
-            <RiGithubLine />
-          </I>
-          <span>{note}</span>
-          <span aria-hidden="true">·</span>
-          {soon ? (
-            <a href={downloads.releaseUrl} rel="noopener">
-              {STICKS_DOWNLOAD.watch}
-            </a>
-          ) : (
-            <span>{STICKS_DOWNLOAD.platforms}</span>
-          )}
-        </p>
-      )}
+      <div className="dl-note">
+        <I>
+          <RiGithubLine />
+        </I>
+        <span>{note}</span>
+        <span aria-hidden="true">·</span>
+        {soon ? (
+          <a href={downloads.releaseUrl} rel="noopener">
+            {STICKS_DOWNLOAD.watch}
+          </a>
+        ) : (
+          <span>{STICKS_DOWNLOAD.platforms}</span>
+        )}
+      </div>
     </div>
+  );
+}
+
+/** The Android button on the last How it works card, as the concept puts it there. */
+function AndroidButton({ downloads }: { downloads: Downloads }) {
+  const href = downloadHref(downloads, downloads.android);
+  return href ? (
+    <a className="btn" href={href} rel="noopener" data-download="android">
+      <I>
+        <RiAndroidFill />
+      </I>
+      {STICKS_DOWNLOAD.android}
+    </a>
+  ) : (
+    <span className="btn is-soon" aria-disabled="true" data-download="android">
+      <I>
+        <RiAndroidFill />
+      </I>
+      {STICKS_DOWNLOAD.android}
+      <small>{STICKS_DOWNLOAD.soon}</small>
+    </span>
   );
 }
 
 export async function SticksLanding({ fontClassName }: { fontClassName: string }) {
   const [downloads, tour] = await Promise.all([loadDownloads(), loadTourScreens()]);
   const screen = (step: string) => tourScreen(step, tour);
-  const one = crowdOnePosition();
   const hire = STICKS_MEET.hire;
 
   return (
@@ -245,8 +252,8 @@ export async function SticksLanding({ fontClassName }: { fontClassName: string }
               <DownloadRow downloads={downloads} />
             </div>
             <div className="crowd" role="img" aria-label={STICKS_HERO.crowdLabel}>
-              <CrowdArt idPrefix="hero" focus={heroFocus()} className="crowd-art" />
-              <span className="you-ring" style={{ left: one.left, top: one.top }} aria-hidden="true" />
+              <CrowdPicture eager />
+              <span className="you-ring" aria-hidden="true" />
               <span className="you-tag" aria-hidden="true">
                 {STICKS_HERO.tag}
               </span>
@@ -306,67 +313,64 @@ export async function SticksLanding({ fontClassName }: { fontClassName: string }
               </div>
               <p>{STICKS_MEET.body}</p>
             </div>
-            <div className="roles">
-              {STICKS_MEET.roles.map((r) => (
-                <article className={r.featured ? "role feat" : "role"} key={r.role}>
-                  <StickHead stick={r.stick} size={r.featured ? 84 : 64} mood="happy" />
-                  <div>
-                    {r.featured && <span className="tag">{STICKS_MEET.startHere}</span>}
-                    <h3>{r.role}</h3>
-                    <p>{r.duty}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-            <div className="meet-row">
-              <div className="screens-row">
-                {STICKS_MEET.screens.map((s) => (
-                  <figure key={s.step}>
-                    <Phone shot={screen(s.step)} alt={s.alt} />
-                    <figcaption>{s.caption}</figcaption>
-                  </figure>
+            <div className="meet-grid">
+              <div className="roles">
+                {STICKS_MEET.roles.map((r) => (
+                  <article className={r.featured ? "role feat" : "role"} key={r.role}>
+                    <StickHead stick={r.stick} size={r.featured ? 84 : 64} mood="happy" />
+                    <div>
+                      {r.featured && <span className="tag">{STICKS_MEET.startHere}</span>}
+                      <h3>{r.role}</h3>
+                      <p>{r.duty}</p>
+                    </div>
+                  </article>
                 ))}
               </div>
-              <div className="hire" aria-label={hire.label}>
-                <div className="board-top">
-                  <b>{hire.title}</b>
-                  <span className="live">{hire.status}</span>
-                </div>
-                <div className="hire-who">
-                  <StickHead stick="sipho" size={54} />
-                  <div>
-                    <b>{hire.name}</b>
-                    <span>{hire.role}</span>
-                  </div>
-                </div>
-                <dl>
-                  {hire.facts.map(([k, v]) => (
-                    <div key={k}>
-                      <dt>{k}</dt>
-                      <dd>{v}</dd>
+              <div className="meet-phone">
+                <div className="meet-duo">
+                  <Phone shot={screen(STICKS_MEET.screen.step)} alt={STICKS_MEET.screen.alt} />
+                  <div className="hire" aria-label={hire.label}>
+                    <div className="board-top">
+                      <b>{hire.title}</b>
+                      <span className="live">{hire.status}</span>
                     </div>
-                  ))}
-                  <div>
-                    <dt>{hire.askLabel}</dt>
-                    <dd className="ask">
-                      <I>
-                        <RiHandHeartLine />
-                      </I>
-                      {hire.ask}
-                    </dd>
+                    <div className="hire-who">
+                      <StickHead stick="sipho" size={54} />
+                      <div>
+                        <b>{hire.name}</b>
+                        <span>{hire.role}</span>
+                      </div>
+                    </div>
+                    <dl>
+                      {hire.facts.map(([k, v]) => (
+                        <div key={k}>
+                          <dt>{k}</dt>
+                          <dd>{v}</dd>
+                        </div>
+                      ))}
+                      <div>
+                        <dt>{hire.askLabel}</dt>
+                        <dd className="ask">
+                          <I>
+                            <RiHandHeartLine />
+                          </I>
+                          {hire.ask}
+                        </dd>
+                      </div>
+                    </dl>
+                    <ol>
+                      {hire.steps.map((step) => (
+                        <li key={step.text} className={step.done ? undefined : "now"}>
+                          <I>{step.done ? <RiCheckboxCircleFill /> : <RiLoader4Line />}</I>
+                          {step.text}
+                        </li>
+                      ))}
+                    </ol>
                   </div>
-                </dl>
-                <ol>
-                  {hire.steps.map((step) => (
-                    <li key={step.text} className={step.done ? undefined : "now"}>
-                      <I>{step.done ? <RiCheckboxCircleFill /> : <RiLoader4Line />}</I>
-                      {step.text}
-                    </li>
-                  ))}
-                </ol>
+                </div>
+                <Real>{STICKS_MEET.real}</Real>
               </div>
             </div>
-            <Real>{STICKS_MEET.real}</Real>
           </div>
         </section>
 
@@ -397,33 +401,27 @@ export async function SticksLanding({ fontClassName }: { fontClassName: string }
                 ))}
               </ul>
             </div>
-            <div className="feed-stage">
-              <div className="board" aria-label={STICKS_FEED.boardLabel}>
-                <div className="board-top">
-                  <b>{STICKS_FEED.board}</b>
-                  <span className="live">{STICKS_FEED.live}</span>
-                </div>
-                <div className="shifts">
-                  {STICKS_FEED.team.map((t) => (
-                    <div className={`shift ${t.state}`} key={t.name}>
-                      <StickHead stick={t.stick} size={46} mood={t.state === "off" ? "sleep" : "calm"} />
-                      {t.name}
-                      <span className="st">{t.label}</span>
-                    </div>
-                  ))}
-                </div>
-                <SticksFeed />
-                <div className="board-note">
-                  <I>
-                    <RiInformationLine />
-                  </I>
-                  {STICKS_FEED.note}
-                </div>
+            <div className="board" aria-label={STICKS_FEED.boardLabel}>
+              <div className="board-top">
+                <b>{STICKS_FEED.board}</b>
+                <span className="live">{STICKS_FEED.live}</span>
               </div>
-              <figure className="feed-phone">
-                <Phone shot={screen(STICKS_FEED.screen.step)} alt={STICKS_FEED.screen.alt} />
-                <Real>{STICKS_FEED.screen.caption}</Real>
-              </figure>
+              <div className="shifts">
+                {STICKS_FEED.team.map((t) => (
+                  <div className={`shift ${t.state}`} key={t.name}>
+                    <StickHead stick={t.stick} size={46} mood={t.state === "off" ? "sleep" : "calm"} />
+                    {t.name}
+                    <span className="st">{t.label}</span>
+                  </div>
+                ))}
+              </div>
+              <SticksFeed />
+              <div className="demo-note">
+                <I>
+                  <RiInformationLine />
+                </I>
+                {STICKS_FEED.note}
+              </div>
             </div>
           </div>
         </section>
@@ -445,11 +443,11 @@ export async function SticksLanding({ fontClassName }: { fontClassName: string }
               {STICKS_ASK.paragraphs.map((p) => (
                 <p key={p}>{p}</p>
               ))}
-              <div className="pair">
+              <div className="ask-phones">
                 {STICKS_ASK.screens.map((s) => (
                   <figure key={s.step}>
-                    <Phone shot={screen(s.step)} alt={s.alt} small />
-                    <Real>{s.caption}</Real>
+                    <Phone shot={screen(s.step)} alt={s.alt} />
+                    <Real icon={s.icon}>{s.caption}</Real>
                   </figure>
                 ))}
               </div>
@@ -488,7 +486,7 @@ export async function SticksLanding({ fontClassName }: { fontClassName: string }
                 })}
               </div>
             </div>
-            <div className="pair offset">
+            <div className="bw-phones">
               {STICKS_BETWEEN.screens.map((s) => (
                 <figure key={s.step}>
                   <Phone shot={screen(s.step)} alt={s.alt} />
@@ -557,7 +555,7 @@ export async function SticksLanding({ fontClassName }: { fontClassName: string }
                     </i>
                     <h3>{step.title}</h3>
                     <p>{step.body}</p>
-                    {i === 0 && <DownloadRow downloads={downloads} compact />}
+                    {last && <AndroidButton downloads={downloads} />}
                   </li>
                 );
               })}
@@ -568,7 +566,7 @@ export async function SticksLanding({ fontClassName }: { fontClassName: string }
         {/* FINAL */}
         <section id="get" className="final" aria-labelledby="final-h">
           <div className="final-art" aria-hidden="true">
-            <CrowdArt idPrefix="band" focus={{ x: 340, y: 430, width: 1200, height: 400 }} className="crowd-art" />
+            <CrowdPicture />
           </div>
           <div className="wrap">
             <h2 id="final-h">{STICKS_FINAL.title}</h2>
