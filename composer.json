@@ -2,7 +2,7 @@
   "name": "sticks_web_composer",
   "version": "1.0.0",
   "description": "Active Next.js SDK list for the sticks-web shell (composed by The-Rokct-Protocol core/utils/nextjs/sdk_composer.py)",
-  "_comment": "Generated at spawn by the factory's seed_composer.py from RokctAI/The-Rokct-Protocol nextjs_compose_example.json (@ 31acbe20c4dfb025cbe2feac1a99a0e314e92cfa). Registry templates are canonical: when core/utils/frappe/composer/sticks-web.json carries an 'sdks' array, every compose re-materializes this file from it, and `scripts/compose.sh refresh` re-pins every entry from the SDK repos. This committed copy is the offline record of the shell's composition floor (SDK_ECOSYSTEM.md hard invariant 9). Change the registry template first, then mirror it here.",
+  "_comment": "The Sticks website's composition (RokctAI/sticks-web, .rokct/config/app_type 'sticks'). Like southriver-web it has no backend and no registry template: this committed file IS the composition, and `scripts/compose.sh refresh` composes from it and re-pins every entry (SDK_ECOSYSTEM.md hard invariant 9: the kernel first). agent_sdk is home through its app_type.sticks block (\"common\": false, The-Rokct-Protocol's Next.js installer), so only the Sticks landing composes - none of rokct.ai's chat, register or opportunities. No auth_sdk: nobody signs in on this site; the Sticks app is where people work.",
   "sdks": [
     {
       "name": "telemetry_sdk",
@@ -25,10 +25,23 @@
       "path": "../core/base/nextjs",
       "ref": "main",
       "sha256": "b6c434a1c05611d29f1018f68b9423383f7ecfbf9cc1efe74825ba6c4df98fff",
-      "version": "1.59.0",
+      "version": "1.60.0",
       "home_sdk": false,
       "_sha256_comment": "SHA-256 of base/nextjs/install.py at core@7bb8d65f (1074 bytes), computed at spawn by the factory's seed_composer.py; required by the composer's unpinned-installer gate. `scripts/compose.sh refresh` re-pins from the registry.",
       "_comment": "The platform kernel: app/services/base, the landing host and its registries, the admin and manager shells. Every other Next.js SDK 'requires' files it installs."
+    },
+    {
+      "name": "agent_sdk",
+      "enabled": true,
+      "source": "git",
+      "git": "https://github.com/RokctAI/agent",
+      "path": "../agent/agent/nextjs",
+      "ref": "main",
+      "sha256": "c629e669d7aeba008b2e1c23a845eb65628f09e8538f738abbfa1385bf1088a3",
+      "version": "1.25.0",
+      "home_sdk": true,
+      "_sha256_comment": "SHA-256 of agent/nextjs/install.py (the generic installer with sdk_name 'agent_sdk'; the digest the consumers index pins).",
+      "_comment": "Home SDK through app_type.sticks (agent_sdk 1.25.0): app/page.tsx is the Sticks landing (concept artifact PDm9514Z16ypx8dk3oQQtq) in the concept's colours, with its crowd picture under public/sticks/ and the site metadata and the Back to top style registered in base_sdk's registries. Pinned to RokctAI/agent main, which includes agent#567 (agent_sdk 1.25.0)."
     }
   ]
 }
