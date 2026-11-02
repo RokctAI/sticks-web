@@ -42,8 +42,8 @@
       "cache": ".rokct/cache/agent",
       "git": "https://github.com/RokctAI/agent",
       "path": "../agent/agent/nextjs",
-      "ref": "1e5c6edd39931b00b1bdb967b11d69059a37e481",
-      "commit": "1e5c6edd39931b00b1bdb967b11d69059a37e481",
+      "ref": "main",
+      "commit": "ed75d1313d371f05a1743c72d13acab27b0bb40d",
       "version": "1.25.0",
       "install_py_sha256": "c629e669d7aeba008b2e1c23a845eb65628f09e8538f738abbfa1385bf1088a3",
       "content_sha256": "791330518d643d2348fcf796df1527db94d174324defab6a471d0dceaf04c2d8"
