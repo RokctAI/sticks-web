@@ -4,7 +4,7 @@
   "app_type": "sticks",
   "protocol": {
     "git": "https://github.com/RokctAI/The-Rokct-Protocol",
-    "ref": "692924e743da09c8392812e50caecd2cd49c9e87",
+    "ref": "833d36c31f67d7493c68ced9b9de0f926317cf42",
     "vendored": ".rokct/cache/_composer",
     "files": {
       "sdk_composer.py": "b437f486a72eed54418ee56bc464e3c016d83a0175d35f28adfd2a9fc37ca943",
@@ -19,7 +19,7 @@
       "git": "https://github.com/RokctAI/core",
       "path": "../core/telemetry/nextjs",
       "ref": "main",
-      "commit": "4951a205303883eba4ab357f0f96744facc9bf85",
+      "commit": "e6c38214d1fb35c0d56abfb6cb8ac59793baf2e9",
       "version": "1.2.2",
       "install_py_sha256": "318d20eb7123ffaa549618d06b4530dfce5df9ba0b07df2328c0c6e1738e36c4",
       "content_sha256": "97652d52df5b1f4fada6bfb41793a47df1b90cc5343aaf317139683cd75db1c1"
@@ -31,10 +31,10 @@
       "git": "https://github.com/RokctAI/core",
       "path": "../core/base/nextjs",
       "ref": "main",
-      "commit": "4951a205303883eba4ab357f0f96744facc9bf85",
+      "commit": "e6c38214d1fb35c0d56abfb6cb8ac59793baf2e9",
       "version": "1.60.0",
       "install_py_sha256": "b6c434a1c05611d29f1018f68b9423383f7ecfbf9cc1efe74825ba6c4df98fff",
-      "content_sha256": "d6cd7f7c8e267f55bc75b2aab6df6468f3da7b6bb1b80d8c2d33d4ca78fec7c8"
+      "content_sha256": "847fd74b20f00202364e7e14eb458ad94bb5810be6a871bc1d981715aaba9206"
     },
     {
       "name": "agent_sdk",
@@ -43,7 +43,7 @@
       "git": "https://github.com/RokctAI/agent",
       "path": "../agent/agent/nextjs",
       "ref": "main",
-      "commit": "ed75d1313d371f05a1743c72d13acab27b0bb40d",
+      "commit": "ec5c1ecc37a2e2f983079a9da5f5f8434c37973d",
       "version": "1.25.0",
       "install_py_sha256": "c629e669d7aeba008b2e1c23a845eb65628f09e8538f738abbfa1385bf1088a3",
       "content_sha256": "791330518d643d2348fcf796df1527db94d174324defab6a471d0dceaf04c2d8"
