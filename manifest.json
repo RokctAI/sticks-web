@@ -1,9 +1,9 @@
 {
   "schema": 1,
   "repo": "RokctAI/sticks-web",
-  "commit": "8b50718fc47949d953ce9ac1a393d1b2d4c69027",
-  "taken_at": "2026-11-08T01:22:50Z",
-  "dir": "shots/8b50718fc47949d953ce9ac1a393d1b2d4c69027",
+  "commit": "5aacd3fcc52a9cb8bb23a296f174e27f7578e132",
+  "taken_at": "2026-11-09T21:57:16Z",
+  "dir": "shots/5aacd3fcc52a9cb8bb23a296f174e27f7578e132",
   "files": {
     "desktop-light.webp": {
       "width": 1200,
