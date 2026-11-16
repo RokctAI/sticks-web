@@ -4,7 +4,7 @@
   "app_type": "sticks",
   "protocol": {
     "git": "https://github.com/RokctAI/The-Rokct-Protocol",
-    "ref": "f4dc808990243c50e929068be09500c20d8c5e46",
+    "ref": "7d30127fe2c73146fc1f2b14615815e38e9691ef",
     "vendored": ".rokct/cache/_composer",
     "files": {
       "sdk_composer.py": "b437f486a72eed54418ee56bc464e3c016d83a0175d35f28adfd2a9fc37ca943",
@@ -19,7 +19,7 @@
       "git": "https://github.com/RokctAI/core",
       "path": "../core/telemetry/nextjs",
       "ref": "main",
-      "commit": "6e4e47e2906a2401e718e6e7cae587d5a176bc3e",
+      "commit": "2693e55bb6741bafa0783943cfa1b1689212e5d8",
       "version": "1.2.2",
       "install_py_sha256": "318d20eb7123ffaa549618d06b4530dfce5df9ba0b07df2328c0c6e1738e36c4",
       "content_sha256": "97652d52df5b1f4fada6bfb41793a47df1b90cc5343aaf317139683cd75db1c1"
@@ -31,10 +31,10 @@
       "git": "https://github.com/RokctAI/core",
       "path": "../core/base/nextjs",
       "ref": "main",
-      "commit": "6e4e47e2906a2401e718e6e7cae587d5a176bc3e",
-      "version": "1.60.0",
+      "commit": "2693e55bb6741bafa0783943cfa1b1689212e5d8",
+      "version": "1.60.1",
       "install_py_sha256": "b6c434a1c05611d29f1018f68b9423383f7ecfbf9cc1efe74825ba6c4df98fff",
-      "content_sha256": "847fd74b20f00202364e7e14eb458ad94bb5810be6a871bc1d981715aaba9206"
+      "content_sha256": "8f5cd51ba4f2e3603f218442a6ca3f2eef90f4a53bbc5c323dd2cad925b90fac"
     },
     {
       "name": "agent_sdk",
@@ -43,10 +43,10 @@
       "git": "https://github.com/RokctAI/agent",
       "path": "../agent/agent/nextjs",
       "ref": "main",
-      "commit": "133e9afa91c7278e0b4e47d43ac7a688db2e2ca3",
-      "version": "1.26.0",
+      "commit": "acde78e07cb2d0d9ca69e0b77c45e5f7a04becd2",
+      "version": "1.26.2",
       "install_py_sha256": "c629e669d7aeba008b2e1c23a845eb65628f09e8538f738abbfa1385bf1088a3",
-      "content_sha256": "a2005ad2b823adbfad5e6077120f7a55baa78d1eb22c590544e9405cb05741c3"
+      "content_sha256": "253f7cd267a00ad1abbc86336958a65408b3ba6ebb1483ecfa3507835d761638"
     }
   ]
 }
