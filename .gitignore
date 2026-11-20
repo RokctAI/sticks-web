@@ -149,6 +149,7 @@ next-env.d.ts
 /components/custom/landing/sticks-sources.server.ts
 /components/custom/landing/sticks-sources.ts
 /components/custom/landing/testimonials-marquee.tsx
+/components/custom/language-toggle.tsx
 /components/custom/menu-label.tsx
 /components/custom/nav/admin-nav.tsx
 /components/custom/nav/client-nav.tsx
