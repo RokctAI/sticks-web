@@ -149,6 +149,7 @@ next-env.d.ts
 /components/custom/landing/sticks-sources.server.ts
 /components/custom/landing/sticks-sources.ts
 /components/custom/landing/testimonials-marquee.tsx
+/components/custom/language-toggle.tsx
 /components/custom/menu-label.tsx
 /components/custom/nav/admin-nav.tsx
 /components/custom/nav/client-nav.tsx
@@ -180,3 +181,6 @@ next-env.d.ts
 /public/sticks/crowd-dark.webp
 /public/sticks/crowd-light.webp
 # @rokct-composed-end
+
+# Written by scripts/compose.sh on every compose (SDK copy registry).
+app/lib/i18n/sdk-registry.ts

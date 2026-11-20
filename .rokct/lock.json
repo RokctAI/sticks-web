@@ -4,11 +4,11 @@
   "app_type": "sticks",
   "protocol": {
     "git": "https://github.com/RokctAI/The-Rokct-Protocol",
-    "ref": "530ee9ce413bf38eb21e26e60370006903f4dec9",
+    "ref": "59801c267a26bd4d2d2641a01830b9c19aabc771",
     "vendored": ".rokct/cache/_composer",
     "files": {
       "sdk_composer.py": "b437f486a72eed54418ee56bc464e3c016d83a0175d35f28adfd2a9fc37ca943",
-      "sdk_installer_base.py": "bc8825efdbb57877153823f4b72ae71f856f213dee6460c39be353c1389db806"
+      "sdk_installer_base.py": "d98a6a1ec8ee75d9bea57191b207df749f5dc04a1edabdb543a295087c454dcb"
     }
   },
   "sdks": [
@@ -19,7 +19,7 @@
       "git": "https://github.com/RokctAI/core",
       "path": "../core/telemetry/nextjs",
       "ref": "main",
-      "commit": "4a1a17244a1a9978a8cec4b64891ff975b7921d9",
+      "commit": "432ccbeb9e54c5ac3e6760e57f92a94071a0d428",
       "version": "1.3.0",
       "install_py_sha256": "318d20eb7123ffaa549618d06b4530dfce5df9ba0b07df2328c0c6e1738e36c4",
       "content_sha256": "a991e6740bd03c5a0a7845631520308bceba62e4bf064806a37812c131cd94cc"
@@ -31,10 +31,10 @@
       "git": "https://github.com/RokctAI/core",
       "path": "../core/base/nextjs",
       "ref": "main",
-      "commit": "4a1a17244a1a9978a8cec4b64891ff975b7921d9",
-      "version": "1.62.0",
+      "commit": "432ccbeb9e54c5ac3e6760e57f92a94071a0d428",
+      "version": "1.64.1",
       "install_py_sha256": "b6c434a1c05611d29f1018f68b9423383f7ecfbf9cc1efe74825ba6c4df98fff",
-      "content_sha256": "ec9400471f73e5c57ebeaf306065bbe0ba0db61df5525ef8826c1e8092886c58"
+      "content_sha256": "1ce791f5a5c13e9981d93cd397f5e68947440843ad5e5eb1c3fbdeb283c57238"
     },
     {
       "name": "agent_sdk",
@@ -43,10 +43,10 @@
       "git": "https://github.com/RokctAI/agent",
       "path": "../agent/agent/nextjs",
       "ref": "main",
-      "commit": "e846858348368c433ef4a89925ea5248a32ca736",
-      "version": "1.27.0",
+      "commit": "7a9c906dfea6622341d698a4e147dc49177c67c9",
+      "version": "1.27.1",
       "install_py_sha256": "c629e669d7aeba008b2e1c23a845eb65628f09e8538f738abbfa1385bf1088a3",
-      "content_sha256": "d7b2b108a4fc76a01b43f366680774df1909d0f497dd6bd1cdd23d1e7a8d127b"
+      "content_sha256": "0e26d5bf8b53ff6cb9c36b6eae860a2878d98fee3e1fe1c6ba0eea329b098f35"
     }
   ]
 }
