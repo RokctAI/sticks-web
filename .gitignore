@@ -81,6 +81,8 @@ next-env.d.ts
 /app/brand-icon/route.tsx
 /app/icon.svg
 /app/landing/page.tsx
+/app/lib/i18n/sdk/base.json
+/app/lib/i18n/sdk/telemetry.json
 /app/lib/site-metadata.ts
 /app/manager/layout.tsx
 /app/manager/page.tsx
