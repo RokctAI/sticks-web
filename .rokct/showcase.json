@@ -18,5 +18,12 @@
       "branch": "main",
       "phone": "marketing/tour/store/05-sticks_team.png"
     }
+  ],
+  "features": [
+    "AI employees hired by job: secretary, clerk, sales",
+    "Every action asks you first",
+    "Live view of what each Stick is doing",
+    "Android and Windows app downloads",
+    "Three-step start: download, hire, answer"
   ]
 }
