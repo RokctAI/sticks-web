@@ -2,6 +2,8 @@
 
 The Sticks website: AI employees that ask first, with downloads of the Sticks app for Android and Windows.
 
+Lives at **<https://usesticks.com>** (the front gate to Sticks). The platform behind it is **platform.usesticks.com**. rokct.ai is the corporate site only, never the way into Sticks.
+
 Spawned by [RokctAI Factory](https://github.com/rokctai/factory) from <https://github.com/RokctAI/factory/issues/55>.
 
 ## Status
