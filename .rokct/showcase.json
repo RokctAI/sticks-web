@@ -21,7 +21,7 @@
   ],
   "features": [
     "Live feed of what each AI employee is doing",
-    "Approval flow before anything is sent",
+    "Ask before it acts: every change is a card you approve",
     "App downloads for Android and Windows"
   ]
 }
