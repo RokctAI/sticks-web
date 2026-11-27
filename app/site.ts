@@ -5,8 +5,8 @@
  * Both come from the deployment, never from code:
  *
  *   NEXT_PUBLIC_SITE_URL   the public origin (no trailing slash). Unset, the
- *                          shell falls back to Vercel's production URL, then
- *                          to localhost - the same resolution base_sdk's
+ *                          shell falls back to STICKS_HOME_URL in production,
+ *                          else to localhost - the same resolution base_sdk's
  *                          app/lib/site-metadata.ts applies to metadataBase,
  *                          so /robots.txt and /sitemap.xml agree with the
  *                          link-preview cards.
@@ -19,6 +19,14 @@
  * the home SDK's, registered into base_sdk's site-metadata registry at
  * compose time (components/custom/landing/site-metadata.ts).
  */
+/**
+ * Where Sticks lives (Ray 2026-11-27). The production origin when
+ * NEXT_PUBLIC_SITE_URL is unset; the platform (hub) sits behind it.
+ * rokct.ai is the corporate site only, never the way into Sticks.
+ */
+export const STICKS_HOME_URL = "https://usesticks.com";
+export const STICKS_PLATFORM_URL = "https://platform.usesticks.com";
+
 function trimSlashes(value: string): string {
   return value.replace(/\/+$/, "");
 }
@@ -26,10 +34,7 @@ function trimSlashes(value: string): string {
 function resolveSiteUrl(): string {
   const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   if (fromEnv) return trimSlashes(fromEnv);
-  const vercel =
-    process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim() ||
-    process.env.NEXT_PUBLIC_VERCEL_URL?.trim();
-  if (vercel) return `https://${trimSlashes(vercel)}`;
+  if (process.env.NODE_ENV === "production") return STICKS_HOME_URL;
   return "http://localhost:3000";
 }
 
