@@ -199,6 +199,32 @@ describe('the provisioner', () => {
     assert.equal(onboardingSession.token, 'tok-1');
   });
 
+  it('sends a paid plan to the checkout first and keeps the claim, making nothing yet', async () => {
+    provisionAnswer = () => ({
+      status: 'payment_required',
+      payment: { url: 'https://www.payfast.co.za/eng/process', fields: { m_payment_id: 'pf-1', amount: '299.00' } },
+      payment_claim: 'claim-1',
+    });
+    const outcome = await provisioner.provision(submission({}));
+    assert.equal(outcome.status, 'payment');
+    if (outcome.status !== 'payment') return;
+    assert.equal(outcome.payment.url, 'https://www.payfast.co.za/eng/process');
+    assert.equal(outcome.payment.fields.m_payment_id, 'pf-1');
+    assert.equal(onboardingSession.claim, 'claim-1');
+    assert.equal(onboardingSession.token, null);
+  });
+
+  it('ignores a checkout that is not https', async () => {
+    provisionAnswer = () => ({
+      status: 'payment_required',
+      payment: { url: 'http://evil.invalid/x', fields: {} },
+      payment_claim: 'claim-2',
+    });
+    const outcome = await provisioner.provision(submission({}));
+    assert.notEqual(outcome.status, 'payment');
+    assert.equal(onboardingSession.claim, null);
+  });
+
   it('keeps no onboarding session when the hub opened none', async () => {
     await provisioner.provision(submission({}));
     assert.equal(onboardingSession.token, null);

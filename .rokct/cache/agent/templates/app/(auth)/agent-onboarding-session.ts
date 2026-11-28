@@ -39,3 +39,27 @@ export async function rememberOnboardingToken(token: string): Promise<void> {
 export async function readOnboardingToken(): Promise<string | null> {
   return (await cookies()).get(ONBOARDING_COOKIE)?.value || null;
 }
+
+// A paid-plan sign-up is held on the hub until PayFast confirms the payment
+// (control: payfast_billing). The hub hands the browser a claim for it; this
+// keeps the claim (httpOnly) until the return page has collected the
+// onboarding session the paid sign-up opens.
+export const PAYMENT_CLAIM_COOKIE = "rokct_payment_claim";
+
+export async function rememberPaymentClaim(claim: string): Promise<void> {
+  (await cookies()).set(PAYMENT_CLAIM_COOKIE, claim, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: MAX_AGE_SECONDS,
+  });
+}
+
+export async function readPaymentClaim(): Promise<string | null> {
+  return (await cookies()).get(PAYMENT_CLAIM_COOKIE)?.value || null;
+}
+
+export async function forgetPaymentClaim(): Promise<void> {
+  (await cookies()).delete(PAYMENT_CLAIM_COOKIE);
+}

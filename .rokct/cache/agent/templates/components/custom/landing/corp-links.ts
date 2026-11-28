@@ -19,4 +19,7 @@
  * Kept out of the rokct-* files, which may not name any outside host.
  * Ray 2026-11-22: "Front gate to sticks will be the sticks web not rokct.ai".
  */
-export const STICKS_WEB_URL = "https://sticks-web.vercel.app";
+// Ray 2026-11-27: Sticks lives at usesticks.com; its platform (the hub) at
+// platform.usesticks.com. rokct.ai is the corporate site only.
+export const STICKS_WEB_URL = "https://usesticks.com";
+export const STICKS_PLATFORM_URL = "https://platform.usesticks.com";

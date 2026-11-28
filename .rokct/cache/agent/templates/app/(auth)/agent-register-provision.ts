@@ -47,7 +47,7 @@
 // isServicePlan), because a RegisterField has no visibility rule.
 
 import { loadTenantLink } from "@/app/(auth)/tenant-link";
-import { rememberOnboardingToken } from "@/app/(auth)/agent-onboarding-session";
+import { rememberOnboardingToken, rememberPaymentClaim } from "@/app/(auth)/agent-onboarding-session";
 import type {
   RegisterOutcome,
   RegisterProvisioner,
@@ -122,6 +122,13 @@ const agentRegisterProvisioner: RegisterProvisioner = {
           ? await provisionServiceSubscription(input)
           : await provisionNewTenant(input);
         if (!result.ok) return { status: "failed", error: result.error };
+        // A paid plan is paid for first (Ray, 2026-11-27): nothing is made
+        // until PayFast confirms. Keep the claim for the return page
+        // (register/paid) and send the visitor to the checkout.
+        if (result.payment && result.paymentClaim) {
+          await rememberPaymentClaim(result.paymentClaim);
+          return { status: "payment", payment: result.payment };
+        }
         siteName = result.siteName;
         // The hub opened an onboarding session and emailed its PIN: keep the
         // session so the register page's "Verify your email" step

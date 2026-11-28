@@ -851,7 +851,16 @@
       "New code sent. Check your inbox.": "Nuwe kode gestuur. Kyk in jou inkassie.",
       "Digit": "Syfer",
       "Enter the 6-digit code from your email.": "Tik die 6-syfer-kode uit jou e-pos in.",
-      "We could not reach the sign-up service. Try again in a moment.": "Ons kon nie die registrasiediens bereik nie. Probeer weer oor 'n oomblik."
+      "We could not reach the sign-up service. Try again in a moment.": "Ons kon nie die registrasiediens bereik nie. Probeer weer oor 'n oomblik.",
+      "Payment received": "Betaling ontvang",
+      "Setting up your business. This takes a few seconds.": "Ons stel jou besigheid op. Dit neem 'n paar sekondes.",
+      "Payment cancelled": "Betaling gekanselleer",
+      "Nothing was charged. You can sign up again any time.": "Niks is gehef nie. Jy kan enige tyd weer aansluit.",
+      "Sign up again": "Sluit weer aan",
+      "Nothing to finish here": "Niks om hier klaar te maak nie",
+      "This sign-up has finished, or was started in another browser.": "Hierdie aansluiting is klaar, of is in 'n ander blaaier begin.",
+      "Log in": "Meld aan",
+      "Something went wrong": "Iets het verkeerd geloop"
     }
   }
 }

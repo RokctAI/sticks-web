@@ -1,4 +1,20 @@
+## 1.32.0
+
+* feat(register): paid-plan web sign-ups pay with PayFast first (Ray 2026-11-27:
+  pay before onboarding). The provisioner sends the visitor to the hub's PayFast
+  checkout and keeps a claim cookie; the new `register/paid` return page waits
+  for the hub to confirm, then shows the email PIN step. Needs control (payfast)
+  and auth_sdk nextjs 1.14.0.
+
 # Changelog
+
+## 1.31.2
+
+* the platform address is now `platform.usesticks.com` (was `platform.rokct.ai`); no other behaviour change.
+
+## 1.31.1
+
+* fix: the corporate page links Sticks at https://usesticks.com (was sticks-web.vercel.app). `landing/corp-links.ts` also names `STICKS_PLATFORM_URL` = https://platform.usesticks.com (Ray 2026-11-27).
 
 ## 1.31.0
 
@@ -13,7 +29,7 @@
 ## 1.29.0
 
 * feat(auth): the hub's email PIN at sign-up (Ray 2026-11-22, approved pin3 renders). The register page gains a "Verify your email" step: a tenant sign-up's onboarding session (control provision_new_tenant's onboarding_token) is kept in an httpOnly cookie, and the step checks the emailed 6-digit code through control:onboarding_verify_pin, with "Send a new code" (control:onboarding_resend_pin) shown from the start and a one-minute wait after each send. No hub session (a Service plan) and the step passes through. Afrikaans phrases added. Needs control#272.
-* feat(hub): the hub theme in one place, components/custom/hub/hub-theme.css with the HubTheme wrapper: the Sticks tokens and faces (Ray: platform.rokct.ai takes the Sticks theme). Used by the PIN step and by subscriptions_sdk's feature switches screen.
+* feat(hub): the hub theme in one place, components/custom/hub/hub-theme.css with the HubTheme wrapper: the Sticks tokens and faces (Ray: platform.usesticks.com takes the Sticks theme). Used by the PIN step and by subscriptions_sdk's feature switches screen.
 
 ## 1.28.0
 
