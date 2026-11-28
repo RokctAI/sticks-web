@@ -1,6 +1,6 @@
 {
   "name": "agent_sdk",
-  "version": "1.31.0",
+  "version": "1.32.0",
   "_comment_version_1_29_0": "1.28.0 -> 1.29.0: the hub's email PIN (Ray 2026-11-22, pin3 renders approved, 'This theme'). The register config gains one post-account step, verify_email (components/custom/auth/agent-verify-pin-step.tsx): a tenant sign-up's onboarding_token (control provision_new_tenant) is kept in an httpOnly cookie (app/(auth)/agent-onboarding-session.ts) and the step checks the emailed code through control:onboarding_verify_pin / control:onboarding_resend_pin (app/(auth)/agent-onboarding-pin.ts); no hub session = the step passes through. New components/custom/hub/ holds the hub theme in one place (hub-theme.css + HubTheme, the Sticks tokens); subscriptions_sdk's feature switches screen uses it too. Needs control with control#272.",
   "_comment_version_1_28_0": "1.27.1 -> 1.28.0: rokct.ai and Sticks landing copy in Afrikaans (Ray, 2026-11-21: \"translate all texts in all our websites\"). Visible text in the rokct-* and sticks landing files goes through base_sdk 1.66.0's tx() (app/lib/i18n/phrases.ts), and the Afrikaans phrase book ships in app/lib/i18n/sdk/agent.json under af.__phrases. The sticks block ships its own phrase book, app/lib/i18n/sdk/sticks.json. Floor: base_sdk >= 1.66.0.",
   "_comment_version_1_27_1": "1.27.1: landing sections rise and fade in as they scroll into view (CSS scroll-driven, no JS, off under reduced motion; Ray 2026-11-20 motion pass). Nothing to install.",
@@ -131,6 +131,18 @@
     {
       "from": "templates/components/custom/auth/agent-verify-pin-step.tsx",
       "to": "components/custom/auth/agent-verify-pin-step.tsx"
+    },
+    {
+      "from": "templates/app/(auth)/agent-paid-signup.ts",
+      "to": "app/(auth)/agent-paid-signup.ts"
+    },
+    {
+      "from": "templates/app/(auth)/register/paid/page.tsx",
+      "to": "app/(auth)/register/paid/page.tsx"
+    },
+    {
+      "from": "templates/components/custom/auth/agent-paid-signup.tsx",
+      "to": "components/custom/auth/agent-paid-signup.tsx"
     },
     {
       "from": "templates/components/custom/hub",

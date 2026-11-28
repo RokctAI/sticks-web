@@ -16,7 +16,7 @@
 "use client";
 
 // The register page's "Verify your email" step (auth_sdk post-account step,
-// declared in ./agent-register-config.ts). The hub (platform.rokct.ai)
+// declared in ./agent-register-config.ts). The hub (platform.usesticks.com)
 // emailed a 6-digit code when sign-up opened the onboarding session; the
 // visitor types it here while the tenant site is still being built (Ray
 // 2026-11-22: the PIN is a buffer, verify early). "Send a new code" shows

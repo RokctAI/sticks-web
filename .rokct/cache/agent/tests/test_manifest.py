@@ -763,6 +763,7 @@ CONTROL_CMDS_OF_OTHER_MODULES = {
     "control:provision_new_tenant": "control/hooks.py override_whitelisted_methods",
     "control:get_pricing_metadata": "control/hooks.py override_whitelisted_methods (allow_guest)",
     "control:onboarding_state": "control onboarding/pulsar cmds_ported.py (guest)",
+    "control:payfast_signup_status": "control fleet/pulsar cmds_ported.py (guest)",
     "control:onboarding_verify_pin": "control onboarding/pulsar cmds_ported.py (guest, control#272)",
     "control:onboarding_resend_pin": "control onboarding/pulsar cmds_ported.py (guest, control#272)",
 }

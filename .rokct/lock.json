@@ -4,7 +4,7 @@
   "app_type": "sticks",
   "protocol": {
     "git": "https://github.com/RokctAI/The-Rokct-Protocol",
-    "ref": "f76a000012944100c5f7c5f833bbfc3a55c88b6d",
+    "ref": "a6542481972ba31f54cc1ac684dedf6e77b7aa11",
     "vendored": ".rokct/cache/_composer",
     "files": {
       "sdk_composer.py": "b437f486a72eed54418ee56bc464e3c016d83a0175d35f28adfd2a9fc37ca943",
@@ -19,7 +19,7 @@
       "git": "https://github.com/RokctAI/core",
       "path": "../core/telemetry/nextjs",
       "ref": "main",
-      "commit": "d9d03b26eaccd6f6978dc677391b05605ab15513",
+      "commit": "9c2b3051447a3fd9384c59ce220b46ffc68462e3",
       "version": "1.3.0",
       "install_py_sha256": "318d20eb7123ffaa549618d06b4530dfce5df9ba0b07df2328c0c6e1738e36c4",
       "content_sha256": "a991e6740bd03c5a0a7845631520308bceba62e4bf064806a37812c131cd94cc"
@@ -31,10 +31,10 @@
       "git": "https://github.com/RokctAI/core",
       "path": "../core/base/nextjs",
       "ref": "main",
-      "commit": "d9d03b26eaccd6f6978dc677391b05605ab15513",
-      "version": "1.68.0",
+      "commit": "9c2b3051447a3fd9384c59ce220b46ffc68462e3",
+      "version": "1.70.0",
       "install_py_sha256": "b6c434a1c05611d29f1018f68b9423383f7ecfbf9cc1efe74825ba6c4df98fff",
-      "content_sha256": "012ed4635a105dea631687944b294d9e35b8316776761b3278c37fd8555e1e3c"
+      "content_sha256": "dc73869c862427798f766b19198f04a83b21c899a9c792a2d3d9201c2ec70d15"
     },
     {
       "name": "agent_sdk",
@@ -43,10 +43,10 @@
       "git": "https://github.com/RokctAI/agent",
       "path": "../agent/agent/nextjs",
       "ref": "main",
-      "commit": "f822debb0f70a46892cc1b3cb3901ee5ccd4dc0b",
-      "version": "1.31.0",
+      "commit": "527d2da9b339137e9eb5356668730a683e1634d1",
+      "version": "1.32.0",
       "install_py_sha256": "c629e669d7aeba008b2e1c23a845eb65628f09e8538f738abbfa1385bf1088a3",
-      "content_sha256": "26962a51388e517d8eac0284ca6a864880c705894e8b019f99db38a2e5c706ff"
+      "content_sha256": "231bb24a5c4557124e59959dafa07a3f8298a662ba2452b7a6dd0a32c4ed58bf"
     }
   ]
 }
